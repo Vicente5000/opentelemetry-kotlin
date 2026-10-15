@@ -415,6 +415,13 @@ public final class io/opentelemetry/kotlin/metrics/instrument/InstrumentValueTyp
 	public static fun values ()[Lio/opentelemetry/kotlin/metrics/instrument/InstrumentValueType;
 }
 
+public abstract interface class io/opentelemetry/kotlin/resource/Entity {
+	public abstract fun getDescription ()Ljava/util/Map;
+	public abstract fun getId ()Ljava/util/Map;
+	public abstract fun getSchemaUrl ()Ljava/lang/String;
+	public abstract fun getType ()Ljava/lang/String;
+}
+
 public abstract interface class io/opentelemetry/kotlin/resource/MutableResource {
 	public abstract fun getAttributes ()Ljava/util/Map;
 	public abstract fun getSchemaUrl ()Ljava/lang/String;
