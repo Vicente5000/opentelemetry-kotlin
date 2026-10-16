@@ -1,11 +1,11 @@
 package io.opentelemetry.kotlin.resource
 
-internal class EntityImpl (
+internal class EntityImpl(
     override val type: String,
     override val schemaUrl: String?,
     override val id: Map<String, Any>,
     override val description: Map<String, Any>
-): Entity {
+) : Entity {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) {
@@ -15,9 +15,9 @@ internal class EntityImpl (
             return false
         }
         return type == other.type &&
-                schemaUrl == other.schemaUrl &&
-                id == other.id &&
-                description == other.description
+            schemaUrl == other.schemaUrl &&
+            id == other.id &&
+            description == other.description
     }
 
     override fun hashCode(): Int {
@@ -27,5 +27,4 @@ internal class EntityImpl (
         result = 31 * result + description.hashCode()
         return result
     }
-
 }
