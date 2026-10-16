@@ -2,7 +2,6 @@ package io.opentelemetry.kotlin.config.yaml.tracing
 
 import io.opentelemetry.kotlin.ExperimentalApi
 import io.opentelemetry.kotlin.behavior.ConsoleExporterBehavior
-import io.opentelemetry.kotlin.behavior.SimpleSpanProcessorBehavior
 import io.opentelemetry.kotlin.behavior.SpanProcessorBehavior
 import io.opentelemetry.kotlin.config.schema.model.SpanProcessor
 
@@ -14,7 +13,7 @@ fun List<SpanProcessor>.toBehavior(): SpanProcessorBehavior? {
     // TODO: Add support to multiple exporters being in use simultaneously once we have the SpanProcessor
     //  fully implemented.
     for (processor in this) {
-        val simple = processor.simple?.let { SimpleSpanProcessorBehavior() }
+        val simple = processor.simple?.toBehavior()
         val batch = processor.batch?.toBehavior()
         val consoleExporter = processor.simple?.exporter?.console ?: processor.batch?.exporter?.console
         if (consoleExporter != null) {
