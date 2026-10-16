@@ -32,5 +32,8 @@ public interface ResourceFactory {
      * https://opentelemetry.io/docs/specs/otel/entities/data-model/
      */
     public fun createEntity(
-        type: String, schemaUrl: String? = null, attributes: EntityAttributesMutator.() -> Unit): Entity? = null
+        type: String,
+        schemaUrl: String? = null,
+        attributes: EntityAttributesMutator.() -> Unit
+    ): Entity? = null
 }
