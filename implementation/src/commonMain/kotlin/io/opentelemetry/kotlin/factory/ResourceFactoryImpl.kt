@@ -56,12 +56,14 @@ internal class ResourceFactoryImpl(
                         )
                     )
                     null
-                } else -> EntityImpl(
-                    type = type,
-                    schemaUrl = schemaUrl,
-                    id = mutator.idAttributes,
-                    description = mutator.descriptionAttributes,
-                )
+                } else -> {
+                    EntityImpl(
+                        type = type,
+                        schemaUrl = schemaUrl,
+                        id = mutator.idAttributes,
+                        description = mutator.descriptionAttributes,
+                    )
+                }
             }
         }
 }
