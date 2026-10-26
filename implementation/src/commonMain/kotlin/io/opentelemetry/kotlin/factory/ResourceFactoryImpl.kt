@@ -3,7 +3,6 @@ package io.opentelemetry.kotlin.factory
 import io.opentelemetry.kotlin.attributes.AttributesModel
 import io.opentelemetry.kotlin.attributes.AttributesMutator
 import io.opentelemetry.kotlin.attributes.NO_ATTRIBUTE_LIMIT
-import io.opentelemetry.kotlin.error.NoopSdkErrorHandler
 import io.opentelemetry.kotlin.error.SdkError
 import io.opentelemetry.kotlin.error.SdkErrorHandler
 import io.opentelemetry.kotlin.error.SdkErrorSeverity
@@ -18,7 +17,7 @@ import io.opentelemetry.kotlin.resource.Resource
 import io.opentelemetry.kotlin.resource.ResourceImpl
 
 internal class ResourceFactoryImpl(
-    private val sdkErrorHandler: SdkErrorHandler = NoopSdkErrorHandler
+    private val sdkErrorHandler: SdkErrorHandler
 ) : ResourceFactory {
 
     override val empty: Resource = ResourceImpl(AttributesModel(attributeLimit = NO_ATTRIBUTE_LIMIT), null)

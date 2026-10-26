@@ -10,8 +10,8 @@ import kotlin.test.assertTrue
 
 internal class ResourceDetectionTest {
 
-    private val factory = ResourceFactoryImpl()
     private val errorHandler = FakeSdkErrorHandler()
+    private val factory = ResourceFactoryImpl(errorHandler)
 
     @Test
     fun testNoDetectors() {

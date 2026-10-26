@@ -42,7 +42,7 @@ import kotlin.test.assertSame
 internal class TracerProviderConfigImplTest {
 
     private val clock = FakeClock()
-    private val base = ResourceFactoryImpl().sdkDefaultResource(SdkMode.REGULAR)
+    private val base = ResourceFactoryImpl(NoopSdkErrorHandler).sdkDefaultResource(SdkMode.REGULAR)
 
     private val contextFactory = ContextFactoryImpl(SpanFactoryImpl())
 

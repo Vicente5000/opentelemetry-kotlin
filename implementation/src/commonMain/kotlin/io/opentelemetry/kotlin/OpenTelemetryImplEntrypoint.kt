@@ -30,8 +30,8 @@ public fun createOpenTelemetry(
      */
     config: OpenTelemetryConfigDsl.() -> Unit = {}
 ): OpenTelemetry {
-    val resourceFactory = ResourceFactoryImpl()
     val cfg = OpenTelemetryConfigImpl(clock).apply(config)
+    val resourceFactory = ResourceFactoryImpl(cfg.sdkErrorHandler)
     val behavior = defaultBehaviorReader(sdkErrorHandler = cfg.sdkErrorHandler)
         .read(configFilePath = cfg.configFilePath, dsl = cfg::toBehavior)
 

@@ -27,7 +27,7 @@ internal class ResourceFactoryImplTest {
 
     @Test
     fun testEmptyReturnsSameInstance() {
-        assertNotSame(factory.empty, ResourceFactoryImpl().empty)
+        assertNotSame(factory.empty, ResourceFactoryImpl(errors).empty)
     }
 
     @Test
