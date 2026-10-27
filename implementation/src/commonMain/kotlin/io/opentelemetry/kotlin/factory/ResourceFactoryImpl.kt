@@ -33,36 +33,36 @@ internal class ResourceFactoryImpl(
         attributes: EntityAttributesMutator.() -> Unit
     ): Entity? =
         sdkErrorHandler.sdkGuardOrDefault(null, "ResourceFactory.createEntity failed") {
+            if (type.isEmpty()) {
+                sdkErrorHandler.reportError(
+                    SdkError.ApiMisuse(
+                        api = "ResourceFactory.createEntity",
+                        message = "Entity type must not be empty",
+                        severity = SdkErrorSeverity.WARNING,
+                    )
+                )
+                return null
+            }
+
             val mutator = EntityAttributesMutatorImpl()
             userCode { mutator.attributes() }
-            when {
-                type.isEmpty() -> {
-                    sdkErrorHandler.reportError(
-                        SdkError.ApiMisuse(
-                            api = "ResourceFactory.createEntity",
-                            message = "Entity type must not be empty",
-                            severity = SdkErrorSeverity.WARNING,
-                        )
+
+            if (mutator.idAttributes.isEmpty()) {
+                sdkErrorHandler.reportError(
+                    SdkError.ApiMisuse(
+                        api = "ResourceFactory.createEntity",
+                        message = "Entity id must contain at least one attribute",
+                        severity = SdkErrorSeverity.WARNING,
                     )
-                    null
-                }
-                mutator.idAttributes.isEmpty() -> {
-                    sdkErrorHandler.reportError(
-                        SdkError.ApiMisuse(
-                            api = "ResourceFactory.createEntity",
-                            message = "Entity id must contain at least one attribute",
-                            severity = SdkErrorSeverity.WARNING,
-                        )
-                    )
-                    null
-                } else -> {
-                    EntityImpl(
-                        type = type,
-                        schemaUrl = schemaUrl,
-                        id = mutator.idAttributes,
-                        description = mutator.descriptionAttributes,
-                    )
-                }
+                )
+                return null
             }
+
+            return EntityImpl(
+                type = type,
+                schemaUrl = schemaUrl,
+                id = mutator.idAttributes,
+                description = mutator.descriptionAttributes,
+            )
         }
 }
